@@ -1,4 +1,32 @@
 <!-- contato.php -->
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Coleta os dados do formulário
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $mensagem = $_POST['mensagem'];
+
+    // Define o destinatário e o assunto do e-mail
+    $para = "lucastomazini2008@gmial.com";  // Substitua com o seu e-mail
+    $assunto = "Novo Contato - Meu Canal do YouTube";
+
+    // Cria o conteúdo do e-mail
+    $corpo = "Nome: $nome\n";
+    $corpo .= "E-mail: $email\n\n";
+    $corpo .= "Mensagem:\n$mensagem\n";
+
+    // Define os cabeçalhos do e-mail
+    $cabecalhos = "From: $email";
+
+    // Envia o e-mail
+    if (mail($para, $assunto, $corpo, $cabecalhos)) {
+        echo "<p>Obrigado pelo seu contato! Em breve, responderemos.</p>";
+    } else {
+        echo "<p>Desculpe, houve um erro ao enviar sua mensagem. Tente novamente.</p>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,7 +50,7 @@
     <main>
         <section>
             <h2>Formulário de Contato</h2>
-            <form action="" method="post">
+            <form action="contato.php" method="post">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required>
 
@@ -38,7 +66,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Meu Canal do YouTube</p>
+        <p>&copy; lucas_ae</p>
     </footer>
 </body>
 </html>
